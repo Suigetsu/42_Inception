@@ -9,9 +9,24 @@ services:
     ports:
       - 433:433
     volumes:
-      - /home/mlagrini/42_Inception/srcs/requirements/nginx/conf/:/etc/nginx/http.d/
-      - /home/mlagrini/42_Inception/srcs/requirements/nginx/tools/:/etc/nginx/ssl/
-      - /home/mlagrini/simple_docker_nginx_html/public/html:/var/www/
+      # - /home/mlagrini/42_Inception/srcs/requirements/nginx/conf/:/etc/nginx/http.d/
+      # - /home/mlagrini/42_Inception/srcs/requirements/nginx/tools/:/etc/nginx/ssl/
+      # - /home/mlagrini/simple_docker_nginx_html/public/html:/var/www/
     restart: always
-  # mariadb:
+  mariadb:
+    build:
+      context: .
+      dockerfile: requirement/mariadb/Dockerfile
+      ports:
+        - 3306:3306
+      env_file: .env
+      environment:
+        MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+        MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+        MYSQL_NAME: ${MYSQL_NAME}
+        MYSQL_USER: ${MYSQL_USER}
+      container_name: mariadb
+      volumes:
+        - mysql-volume:/var/lib/mysql
+      restart: always
   # php:
