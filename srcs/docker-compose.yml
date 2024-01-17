@@ -1,0 +1,15 @@
+version: '3.9'
+
+services:
+  nginx:
+    build:
+      context: .
+      dockerfile: ./requirements/nginx/Dockerfile
+    ports:
+      - 443:443
+    volumes:
+      - ./requirements/nginx/conf:/etc/nginx/http.d/
+      - ./requirements/nginx/tools:/etc/nginx/ssl/
+      - ./requirements/nginx/html:/var/www
+    container_name: nginx
+    restart: always
