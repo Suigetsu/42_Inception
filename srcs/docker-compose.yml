@@ -5,11 +5,36 @@ services:
     build:
       context: .
       dockerfile: ./requirements/nginx/Dockerfile
+      args:
+        - DOMAIN_NAME=${DOMAIN_NAME}
+        - SSL_CERT=${SSL_CERT}
+        - SSL_KEY=${SSL_KEY}
+        - DOLLAR_SIGN=${DOLLAR_SIGN}
     ports:
       - 443:443
     volumes:
-      - ./requirements/nginx/conf:/etc/nginx/http.d/
       - ./requirements/nginx/tools:/etc/nginx/ssl/
       - ./requirements/nginx/html:/var/www
     container_name: nginx
+    env_file:
+      - .env
     restart: always
+  mariadb:
+    build:
+      context: .
+      dockerfile: ./requirements/mariadb/Dockerfile
+      args:
+        - MYSQL_NAME=${MYSQL_NAME}
+        - MYSQL_USER=${MYSQL_USER}
+        - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+        - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    ports:
+      - 3306:3306
+    volumes:
+      - my-db:/var/lib/mysql
+    container_name: mariadb
+    restart: always
+    env_file:
+      - .env
+volumes:
+  my-db:

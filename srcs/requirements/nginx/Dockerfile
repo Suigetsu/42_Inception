@@ -6,11 +6,14 @@
 #    By: mlagrini <mlagrini@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/02 15:09:40 by mlagrini          #+#    #+#              #
-#    Updated: 2024/01/17 17:37:51 by mlagrini         ###   ########.fr        #
+#    Updated: 2024/01/22 14:52:57 by mlagrini         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 FROM    alpine:3.18
-RUN     apk update && apk upgrade && apk add --no-cache nginx
+ARG     DOMAIN_NAME SSL_CERT SSL_KEY DOLLAR_SIGN
+RUN     apk update && apk upgrade && apk add --no-cache nginx gettext
 EXPOSE  443
-CMD     ["nginx", "-g", "daemon off;"]
+COPY    requirements/nginx/conf/nginx_conf_script.sh .
+CMD     [ "sh", "nginx_conf_script.sh" ]
+# CMD [ "nginx", "-g", "daemon off;" ]
