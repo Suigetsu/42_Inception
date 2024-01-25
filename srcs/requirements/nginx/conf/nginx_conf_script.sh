@@ -19,4 +19,3 @@ server {
     }
 }
 EOF
-nginx -g 'daemon off;'
