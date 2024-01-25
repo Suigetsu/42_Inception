@@ -31,10 +31,41 @@ services:
     ports:
       - 3306:3306
     volumes:
-      - my-db:/var/lib/mysql
+      - db-volume:/var/lib/mysql
     container_name: mariadb
     restart: always
     env_file:
       - .env
+  wordpress:
+    build:
+      context: .
+      dockerfile: ./requirements/wordpress/Dockerfile
+      args:
+        - MYSQL_NAME=${MYSQL_NAME}
+        - MYSQL_USER=${MYSQL_USER}
+        - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+        - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    ports:
+      - 9000:9000
+    volumes:
+      - wp-volume:/var/www
+    container_name: wordpress
+    restart: always
+    env_file:
+      - .env
+    depends_on:
+      - mariadb
 volumes:
-  my-db:
+  db-volume:
+    driver_opts:
+      o: bind
+      type: none
+      device: /home/mlagrini/data/mariadb
+  wp-volume:
+    driver_opts:
+      o: bind
+      type: none
+      device: /home/mlagrini/data/wordpress
+networks:
+  inception:
+    driver: bridge
