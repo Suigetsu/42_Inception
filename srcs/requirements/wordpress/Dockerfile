@@ -17,11 +17,11 @@ RUN     apk update && apk upgrade && apk add --no-cache php82 php82-fpm \
         php82-fileinfo php82-mbstring php82-openssl php82-xml php82-zip \
         php82-redis wget unzip
 RUN     mkdir /var/www/ && cd /var/www/ && wget https://wordpress.org/latest.zip && \
-        unzip latest.zip && \
-        cp -rf wordpress/* . && \
-        rm -rf wordpress latest.zip
+        unzip latest.zip && cp -rf wordpress/* . && rm -rf wordpress latest.zip
 RUN     sed -i "s@listen 127.0.0.1:9000@listen 9000@" /etc/php82/php-fpm.d/www.conf && \
         sed -i "s@;listen.owner = nobody@listen.owner = nobody@" /etc/php82/php-fpm.d/www.conf && \
         sed -i "s@;listen.group = nobody@listen.group = nobody@" /etc/php82/php-fpm.d/www.conf
-
-CMD     [ "yes" ]
+COPY    ./requirements/wordpress/conf /var/www/
+RUN     sh /var/www/setup_wordpress.sh && rm /var/www/setup_wordpress.sh && chmod -R 0777 /var/www/wp-content/
+CMD     [ "php-fpm82" "-F" ]
+# CMD     [ "yes" ]
