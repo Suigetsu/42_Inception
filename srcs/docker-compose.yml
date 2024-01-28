@@ -14,7 +14,8 @@ services:
       - 443:443
     volumes:
       - ./requirements/nginx/tools:/etc/nginx/ssl/
-      - ./requirements/nginx/html:/var/www
+      - ./requirements
+      - wp-volume:/var/www
     container_name: nginx
     env_file:
       - .env

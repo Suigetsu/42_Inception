@@ -23,5 +23,5 @@ RUN     sed -i "s@listen 127.0.0.1:9000@listen 9000@" /etc/php82/php-fpm.d/www.c
         sed -i "s@;listen.group = nobody@listen.group = nobody@" /etc/php82/php-fpm.d/www.conf
 COPY    ./requirements/wordpress/conf /var/www/
 RUN     sh /var/www/setup_wordpress.sh && rm /var/www/setup_wordpress.sh && chmod -R 0777 /var/www/wp-content/
-CMD     [ "php-fpm82" "-F" ]
+CMD     [ "php-fpm82", "-F" ]
 # CMD     [ "yes" ]

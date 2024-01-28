@@ -17,5 +17,13 @@ server {
         # expires off;
         # etag off;
     }
+    location ~ \.php${DOLLAR_SIGN} {
+        fastcgi_split_path_info ^(.+\.php)(/.+)${DOLLAR_SIGN};
+        fastcgi_pass wordpress:9000;
+        fastcgi_index index.php;
+        include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME ${DOLLAR_SIGN}document_root${DOLLAR_SIGN}fastcgi_script_name;
+        fastcgi_param PATH_INFO ${DOLLAR_SIGN}fastcgi_path_info;
+    }
 }
 EOF
