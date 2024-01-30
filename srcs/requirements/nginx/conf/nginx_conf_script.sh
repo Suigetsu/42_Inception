@@ -10,7 +10,7 @@ server {
     ssl_certificate_key ${SSL_KEY};
     ssl_protocols       TLSv1.2 TLSv1.3;
     location / {
-        try_files ${DOLLAR_SIGN}uri /index.php?${DOLLAR_SIGN}args /index.html;
+        try_files ${DOLLAR_SIGN}uri ${DOLLAR_SIGN}uri/ /index.php?${DOLLAR_SIGN}args;
         # add_header Last-Modified ${DOLLAR_SIGN}date_gmt;
         add_header Cache-Control 'no-store, no-cache';
         # if_modified_since off;

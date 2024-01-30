@@ -13,7 +13,6 @@
 FROM        alpine:3.18
 ARG         DOMAIN_NAME SSL_CERT SSL_KEY DOLLAR_SIGN
 RUN         apk update && apk upgrade && apk add --no-cache nginx gettext
-EXPOSE      443
 COPY        requirements/nginx/conf/nginx_conf_script.sh .
 RUN         chmod 777 nginx_conf_script.sh && /nginx_conf_script.sh
 CMD         [ "nginx", "-g", "daemon off;" ]
