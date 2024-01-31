@@ -13,9 +13,6 @@ server {
         try_files ${DOLLAR_SIGN}uri ${DOLLAR_SIGN}uri/ /index.php?${DOLLAR_SIGN}args;
         # add_header Last-Modified ${DOLLAR_SIGN}date_gmt;
         add_header Cache-Control 'no-store, no-cache';
-        # if_modified_since off;
-        # expires off;
-        # etag off;
     }
     location ~ \.php${DOLLAR_SIGN} {
         fastcgi_split_path_info ^(.+\.php)(/.+)${DOLLAR_SIGN};
