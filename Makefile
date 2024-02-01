@@ -10,9 +10,14 @@
 #                                                                              #
 # **************************************************************************** #
 
-all:
-	docker-compose -f ./docker-compose.yml up -d
+all: build
+
 build:
-	docker-compose -f ./docker-compose.yml up -d --build
+	./srcs/requirements/tools/volumes_script.sh
+	docker-compose -f srcs/docker-compose.yml up -d --build
+
 down:
-	docker-compose -f ./docker-compose.yml down
+	docker-compose -f srcs/docker-compose.yml down
+
+fclean: down
+	docker system prune -a --volumes
