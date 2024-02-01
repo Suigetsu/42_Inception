@@ -77,4 +77,3 @@ volumes:
       device: /home/mlagrini/data/wordpress
 networks:
   inception:
-    driver: bridge
