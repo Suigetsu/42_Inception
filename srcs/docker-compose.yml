@@ -34,7 +34,7 @@ services:
         - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
         - MYSQL_ROOT=${MYSQL_ROOT}
     ports:
-      - 3306:3306
+      - 3306
     volumes:
       - db-volume:/var/lib/mysql
     container_name: mariadb
@@ -53,7 +53,7 @@ services:
         - MYSQL_PASSWORD=${MYSQL_PASSWORD}
         - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
     ports:
-      - 9000:9000
+      - 9000
     volumes:
       - wp-volume:/var/www
     container_name: wordpress
