@@ -21,3 +21,4 @@ down:
 
 fclean: down
 	docker system prune -a --volumes
+	docker volume prune
