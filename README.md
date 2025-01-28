@@ -84,5 +84,14 @@ After running ps command, you can see that it's not isolated.
 <img width="824" alt="image(1)" src="https://github.com/user-attachments/assets/7ebb91fd-5d0c-49b4-bbff-bb272a1d7aba" />
 <img width="817" alt="image(2)" src="https://github.com/user-attachments/assets/85e9ac46-114c-4b79-83a3-4ce749f99adb" />
 
+#### Cgroups
+A Linux kernel feature that enables the management and isolation of system resources for groups of processes.
+> Cgroups allow you to allocate resources — such as CPU time, system memory, network bandwidth, or combinations of these resources — among user-defined groups of tasks (processes) running on a system. You can monitor the cgroups you configure, deny cgroups access to certain resources, and even reconfigure your cgroups dynamically on a running system.
+> [Chapter 1. Introduction to Control Groups (Cgroups)](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/6/html/resource_management_guide/ch01#idm139819585387936)
+
+This is an example of how to use Cgroups.
+
+If you like this kind of examples please consider checking and supporting this [zine](https://wizardzines.com/zines/containers/) made by [Julia Evans](https://x.com/b0rk).
+![image(3)](https://github.com/user-attachments/assets/0d6251ce-51c3-40c8-b1bc-33be8608a5a6)
 
 
