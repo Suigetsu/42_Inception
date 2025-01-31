@@ -6,8 +6,8 @@ This project is about setting up a small infrastructure composed of different se
    - [OS-LEVEL VIRTUALIZATION](https://github.com/Suigetsu/42_Inception/new/main?filename=README.md#os-level-virtualization)
        - [Namespaces](https://github.com/Suigetsu/42_Inception/new/main?filename=README.md#namespaces)
        - Cgroups
-   - Linux Containers (LxC)
-       - LxC vs Docker
+   - Linux Containers (LXC)
+       - LXC vs Docker
    - How does Docker work?
        - Docker ecosystem
        - Docker Engine
@@ -94,4 +94,36 @@ This is an example of how to use Cgroups.
 If you like this kind of examples please consider checking and supporting this [zine](https://wizardzines.com/zines/containers/) made by [Julia Evans](https://x.com/b0rk).
 ![image(3)](https://github.com/user-attachments/assets/0d6251ce-51c3-40c8-b1bc-33be8608a5a6)
 
+### Linux Containers (LXC)
+Just like Docker, LXC is a well-known Linux container runtime that consists of tools, templates, and library and language bindings.
+It's pretty low level, very flexible and covers just about every containment feature supported by the upstream kernel.
 
+LXC is often used for system containers, which behave more like traditional virtual machines, providing a full operating system environment within the container.
+It is highly customizable and can be used to build containerized environments tailored to specific needs. [Learn more](https://linuxcontainers.org/lxc/introduction/)
+
+#### LXC vs Docker
+<img width="873" alt="image" src="https://github.com/user-attachments/assets/942feda4-153f-42ae-b0bc-3e5b808b9a8c" />
+
+To keep it short, LXC is more flexible since it's low level.
+You get to use the Kernel features in anyway you want, and basically, like a VM, you can install and configure anything you want with the container.
+
+On the other hand, there is an engine that handles all the low level operations when using Docker.
+So it's super friendly for people with no prior linux knowledge. Also Docker comes with a rich ecosystem of tools (e.g., Docker Compose, Docker Swarm) and a vast library of pre-built images, making it ideal for modern DevOps workflows.
+
+### How does Docker work?
+**_Docker_** uses a **client-server architecture** to manage containers. Here’s how it works:
+   - **Docker Client**: The **Docker client** is the primary way users interact with **_Docker_**. It sends commands (e.g., ```docker build```, ```docker run```) to the **Docker daemon**.
+        The client can run on the same system as the daemon or connect to a remote **Docker daemon**.
+   - **Docker Daemon**: The **Docker daemon** (**dockerd**) is the server component that does the heavy lifting. It handles tasks like:
+        - Building Docker images.
+        - Running containers.
+        - Managing storage and networking for containers.
+        - Distributing images via Docker registries (e.g., Docker Hub).
+          
+        The daemon listens for requests from the Docker client and executes them.
+   - **Communication**: The **Docker client** and daemon communicate using a **REST API**.
+        Communication can occur over:
+        - UNIX sockets (for local communication on the same system).
+        - Network interfaces (for remote communication).
+   - **Docker Compose**: **Docker Compose** is another Docker client designed for managing multi-container applications.
+        It allows you to define and run applications consisting of multiple containers using a single configuration file (**docker-compose.yml**).
