@@ -11,6 +11,7 @@ This project is about setting up a small infrastructure composed of different se
    - How does Docker work?
        - Docker ecosystem
        - Docker Engine
+       - Docker Compose
    - Containers vs VMs
    - Daemons
 2. Project's Structure
@@ -127,3 +128,48 @@ So it's super friendly for people with no prior linux knowledge. Also Docker com
         - Network interfaces (for remote communication).
    - **Docker Compose**: **Docker Compose** is another Docker client designed for managing multi-container applications.
         It allows you to define and run applications consisting of multiple containers using a single configuration file (**docker-compose.yml**).
+
+#### Docker ecosystem
+![image(1)](https://github.com/user-attachments/assets/855428cd-d59b-4c1d-b70c-0fa93d223b0d)
+
+**Explaining the docker ecosystem components in details.**
+
+![image](https://github.com/user-attachments/assets/5960cb99-36d9-4f4e-8d07-966a662353eb)
+
+- Docker daemon
+![image](https://github.com/user-attachments/assets/abb30053-4a0d-4944-a90e-227311328f73)
+
+- Docker Image
+
+An executable package of software that includes everything needed to run an application.
+This image informs how a container should instantiate, determining which software components will run and how.
+
+To Create A Docker Image:
+
+   1- Create a Dockerfile
+   2- Build the image using the Dockerfile, this command does the job: ```docker build -t <name>:<tag>```
+   It will create a docker image of the application and download all the necessary dependencies needed for the application to run successfully.
+   3- The image has been built and ready to be run. This command is an example of how to run your built image: ```docker run <image-name>:<tag>```
+![image](https://github.com/user-attachments/assets/963b8334-c2b7-4b5b-a653-32e9082ed19d)
+
+Dockerfile Definition:
+
+A Dockerfile is a text file that contains instructions for building a Docker image.
+It specifies the base image, sets up the environment, copies files, installs dependencies, and configures the application.
+Docker uses the Dockerfile to create the layers that make up the final image.
+Dockerfile create all the layers needed for an image. Starting from the base image to the regestry.  
+
+Example of a Dockerfile
+![image](https://github.com/user-attachments/assets/3644e25c-7a95-444a-94c8-68395923f1c2)
+
+Structure of an image created by the Dockerfile:
+
+   1- Base Image: The basic image will be the starting point for the majority of Dockerfiles, and it can be made from scratch.
+   2- Layers: Docker images are composed of layers. Each instruction in a Dockerfile (the script used to build an image) creates a new layer.
+   Layers are cached, which allows for efficient image building. When changes are made to an image, only the affected layers need to be rebuilt.
+   3- Docker registry: A system for storing and distributing Docker images with specific names. It's like a repository where you can push your own images, make them public or private, or pull public images and build them.
+
+![image](https://github.com/user-attachments/assets/719c931b-19f4-40af-a182-261a8b5412f4)
+
+![image](https://github.com/user-attachments/assets/cd23ba34-fd3e-47be-aadc-eab6eeec0969)
+[this cool medium article](https://medium.com/techmormo/how-do-docker-images-work-docker-made-easy-part-2-91d5c1a8d8a6)
