@@ -5,15 +5,15 @@ This project is about setting up a small infrastructure composed of different se
 1. [Docker definition](https://github.com/Suigetsu/42_Inception/new/main?filename=README.md#docker-definition)
    - [OS-LEVEL VIRTUALIZATION](https://github.com/Suigetsu/42_Inception/new/main?filename=README.md#os-level-virtualization)
        - [Namespaces](https://github.com/Suigetsu/42_Inception/new/main?filename=README.md#namespaces)
-       - Cgroups
-   - Linux Containers (LXC)
-       - LXC vs Docker
-   - How does Docker work?
-       - Docker ecosystem
-       - Docker Engine
-       - Docker Compose
-   - Containers vs VMs
-   - Daemons
+       - [Cgroups](https://github.com/Suigetsu/42_Inception/edit/main/README.md#cgroups)
+   - [Linux Containers (LXC)](https://github.com/Suigetsu/42_Inception/edit/main/README.md#linux-containers-lxc)
+       - [LXC vs Docker](https://github.com/Suigetsu/42_Inception/edit/main/README.md#lxc-vs-docker)
+   - [How does Docker work?](https://github.com/Suigetsu/42_Inception/edit/main/README.md#how-does-docker-work)
+       - [Docker ecosystem](https://github.com/Suigetsu/42_Inception/edit/main/README.md#docker-ecosystem)
+       - [Docker Engine](https://github.com/Suigetsu/42_Inception/edit/main/README.md#docker-engine)
+       - [Docker Compose](https://github.com/Suigetsu/42_Inception/edit/main/README.md#docker-compose)
+   - [Containers vs VMs](https://github.com/Suigetsu/42_Inception/edit/main/README.md#containers-vs-vms)
+   - [Daemons](https://github.com/Suigetsu/42_Inception/edit/main/README.md#daemons)
 2. Project's Structure
 3. [The project's requirements](https://github.com/Suigetsu/ft_irc?tab=readme-ov-file#requirements)
 4. [Resources](https://github.com/Suigetsu/ft_irc?tab=readme-ov-file#resources)
@@ -147,9 +147,13 @@ This image informs how a container should instantiate, determining which softwar
 To Create A Docker Image:
 
    1- Create a Dockerfile
+   
    2- Build the image using the Dockerfile, this command does the job: ```docker build -t <name>:<tag>```
+   
    It will create a docker image of the application and download all the necessary dependencies needed for the application to run successfully.
+   
    3- The image has been built and ready to be run. This command is an example of how to run your built image: ```docker run <image-name>:<tag>```
+   
 ![image](https://github.com/user-attachments/assets/963b8334-c2b7-4b5b-a653-32e9082ed19d)
 
 Dockerfile Definition:
@@ -165,11 +169,82 @@ Example of a Dockerfile
 Structure of an image created by the Dockerfile:
 
    1- Base Image: The basic image will be the starting point for the majority of Dockerfiles, and it can be made from scratch.
+   
    2- Layers: Docker images are composed of layers. Each instruction in a Dockerfile (the script used to build an image) creates a new layer.
+   
    Layers are cached, which allows for efficient image building. When changes are made to an image, only the affected layers need to be rebuilt.
+   
    3- Docker registry: A system for storing and distributing Docker images with specific names. It's like a repository where you can push your own images, make them public or private, or pull public images and build them.
 
 ![image](https://github.com/user-attachments/assets/719c931b-19f4-40af-a182-261a8b5412f4)
 
 ![image](https://github.com/user-attachments/assets/cd23ba34-fd3e-47be-aadc-eab6eeec0969)
 [this cool medium article](https://medium.com/techmormo/how-do-docker-images-work-docker-made-easy-part-2-91d5c1a8d8a6)
+
+- Docker Registeries
+>> Docker Registry aids in development automation.
+The docker registry allows you to automate building, testing, and deployment.
+Docker registry may be used to create faster CI/CD pipelines, which helps to reduce build and deployment time.
+Docker Registry is useful if you want complete control over where your images are kept.
+A private Docker registry can be used. You gain total control over your applications by doing so.
+In addition to controlling who may access your Docker images, you can determine who can view them.
+Docker Registry can provide you with information about any issue you may encounter.
+You may also completely rely on it for container deployment and access it at any moment. - [Source](https://www.geeksforgeeks.org/what-is-docker-registry/)
+
+![image](https://github.com/user-attachments/assets/37c067e5-85cf-4833-82d4-87639c6a7168)
+
+Different Types of Docker Registries:
+
+1- DockerHub
+
+2- Amazon Elastic Container Registry (ECR)
+
+3- Google Container Registry (GCR)
+
+4- Azure Container Registry (ACR)
+
+![image](https://github.com/user-attachments/assets/d3a52c51-9be7-430d-84d9-de23a23eb51f)
+
+- Docker Containers
+
+![Screenshot from 2025-02-04 13-12-15](https://github.com/user-attachments/assets/5bbcf4a0-7efb-4d6a-8e96-1d3855a963ac)
+
+
+#### Docker Engine
+
+**Docker engine** consist of several key parts such as the docker daemon, an API interface, and Docker CLI.
+
+![image](https://github.com/user-attachments/assets/32bc7299-7b4d-4fb3-a366-fd866c416404)
+
+#### Docker Compose
+A tool that will help us run multiple containers.
+With Compose, you use a YAML file to configure your application's services.
+Then, with a single command, you create and start all the services from your configuration.  
+
+![image](https://github.com/user-attachments/assets/f9942808-4e74-461f-b114-d2cb479d6fe0)
+
+### Containers vs VMs
+
+![image](https://github.com/user-attachments/assets/67a7804b-a7b7-4ff8-b326-5ae3e6bd621c)
+
+![Screenshot from 2025-02-04 13-17-33](https://github.com/user-attachments/assets/e7245b44-330e-4ade-9d16-8b449502e70f)
+
+### Daemons
+A process that runs in the background and is usually out of the control of the user.
+They are utility programs that run silently in the background to monitor and take care of certain subsystems to ensure that the operating system runs properly.
+A printer daemon monitors and takes care of printing services.
+A network daemon monitors and maintains network communications, and so on.
+Daemons perform certain actions at predefined times or in response to certain events.
+
+Besides of daemons, there are two other types of processes: interactive and batch:
+- Interactive processes: Interactive processes are those which are run by a user at the command line are called interactive processes.
+- Batch: Batch processing is the method computers use to periodically complete high-volume, repetitive data jobs. Certain data processing tasks, such as backups, filtering, and sorting, can be compute intensive and inefficient to run on individual data transactions.
+
+Interactive processes and batch jobs are not daemons even though they can be run in the background and can do some monitoring work.
+The key is that these two types of processes involve human input through some sort of terminal control. Daemons do not need a person to start them up.
+
+To list all services that start at boot:
+```systemctl list-unit-files --type=service```
+
+![Screenshot from 2025-02-04 13-22-11](https://github.com/user-attachments/assets/a49c94b5-9540-45e4-afdd-071dc05e68a9)
+
