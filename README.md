@@ -14,10 +14,10 @@ This project is about setting up a small infrastructure composed of different se
        - [Docker Compose](https://github.com/Suigetsu/42_Inception/edit/main/README.md#docker-compose)
    - [Containers vs VMs](https://github.com/Suigetsu/42_Inception/edit/main/README.md#containers-vs-vms)
    - [Daemons](https://github.com/Suigetsu/42_Inception/edit/main/README.md#daemons)
-2. Project's Structure
-3. [The project's requirements](https://github.com/Suigetsu/ft_irc?tab=readme-ov-file#requirements)
-4. [Resources](https://github.com/Suigetsu/ft_irc?tab=readme-ov-file#resources)
-5. [Authors](https://github.com/Suigetsu/ft_irc?tab=readme-ov-file#authors)
+2. [Project's Structure](https://github.com/Suigetsu/42_Inception/edit/main/README.md#projects-structure)
+3. [The project's requirements](https://github.com/Suigetsu/42_Inception/edit/main/README.md#the-projects-requirements)
+4. [Resources](https://github.com/Suigetsu/42_Inception/edit/main/README.md#resources)
+
 ## Docker definition
 **_Docker_** is a **_containerization platform_** that uses **OS-level virtualization** to deliver software in packages called **containers**.
 
@@ -247,4 +247,66 @@ To list all services that start at boot:
 ```systemctl list-unit-files --type=service```
 
 ![Screenshot from 2025-02-04 13-22-11](https://github.com/user-attachments/assets/a49c94b5-9540-45e4-afdd-071dc05e68a9)
+
+## Project's Structure
+```
+├── Makefile
+├── README.md
+├── srcs
+│   ├── docker-compose.yml
+│   └── requirements
+│       ├── mariadb
+│       │   ├── conf
+│       │   │   ├── db_script.sh
+│       │   │   └── mysql_install_db.sh
+│       │   ├── Dockerfile
+│       │   └── tools
+│       ├── nginx
+│       │   ├── conf
+│       │   │   └── nginx_conf_script.sh
+│       │   └── Dockerfile
+│       ├── tools
+│       │   └── volumes_script.sh
+│       └── wordpress
+│           ├── conf
+│           │   ├── get_wordpress.sh
+│           │   └── setup_wordpress.sh
+│           ├── Dockerfile
+│           └── tools
+```
+## The project's requirements
+This project consists of setting up a small infrastructure composed of different services under specific rules.
+The whole project has to be done in a virtual machine using docker compose.
+Each Docker image must have the same name as its corresponding service.
+Each service has to run in a dedicated container.
+For performance matters, the containers must be built either from the penultimate stable version of Alpine or Debian, writing our own Dockerfiles, one per service.
+The Dockerfiles must be called in docker-compose.yml by the Makefile.
+It is then forbidden to pull ready-made Docker images, as well as using services such as DockerHub (Alpine/Debian being excluded from this rule).
+
+Here is an example diagram of the expected result:
+
+![image](https://github.com/user-attachments/assets/c1866b35-b697-4d18-b9d1-0362b166eee2)
+
+## Resources
+
+[Julia Evans](https://x.com/b0rk) Blog [What even is a container: namespaces and cgroups](https://jvns.ca/blog/2016/10/10/what-even-is-a-container/) and her [zines](https://wizardzines.com/zines/containers/)
+
+Scott van Kalken's [Blog What Are Namespaces and cgroups, and How Do They Work?](https://blog.nginx.org/blog/what-are-namespaces-cgroups-how-do-they-work)
+
+man [unshare](https://man7.org/linux/man-pages/man1/unshare.1.html)
+
+Red Hat [Chapter 1. Introduction to Control Groups (Cgroups)](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/6/html/resource_management_guide/ch01)
+
+[LXC](https://linuxcontainers.org/lxc/introduction/)
+
+[Docker Engine](https://www.docker.com/products/container-runtime/)
+
+Bibin Wilson's [What is Docker? How Does it Work?](https://devopscube.com/what-is-docker)
+
+Farhim Ferdous's [How do Docker Images work? | Docker made easy #2](https://medium.com/techmormo/how-do-docker-images-work-docker-made-easy-part-2-91d5c1a8d8a6)
+
+Geeks for Geeks's [What is Docker Registry?](https://www.geeksforgeeks.org/what-is-docker-registry/)
+
+Bill Dyer's [Linux Jargon Buster: What are Daemons in Linux?](https://itsfoss.com/linux-daemons/)
+
 
